@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f172a" />
+  <meta name="description" content="Kameranızla yakaladığınız metinleri anında seçtiğiniz dile çevirin." />
+  <title>Kamera Çevirmeni</title>
+  <link rel="manifest" href="manifest.json?v=6" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png?v=6" />
+  <link rel="stylesheet" href="style.css?v=6" />
+
+  <!-- Tesseract.js (on-device OCR) -->
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@7/dist/tesseract.min.js"></script>
+  <!-- franc, app.js içinde dinamik ESM import ile yükleniyor -->
+</head>
+<body>
+  <header>
+    <h1>📷 Kamera Çevirmeni</h1>
+  </header>
+
+  <main>
+    <section class="ayar-karti">
+      <label for="kaynakDil">Kaynak Dil</label>
+      <select id="kaynakDil">
+        <option value="auto" selected>🌐 Otomatik Algıla</option>
+        <option value="tr">Türkçe</option>
+        <option value="en">İngilizce</option>
+        <option value="de">Almanca</option>
+        <option value="fr">Fransızca</option>
+        <option value="es">İspanyolca</option>
+        <option value="it">İtalyanca</option>
+        <option value="pt">Portekizce</option>
+        <option value="ru">Rusça</option>
+        <option value="ar">Arapça</option>
+      </select>
+
+      <label for="hedefDil">Hedef Dil</label>
+      <select id="hedefDil">
+        <option value="tr" selected>Türkçe</option>
+        <option value="en">İngilizce</option>
+        <option value="de">Almanca</option>
+        <option value="fr">Fransızca</option>
+        <option value="es">İspanyolca</option>
+        <option value="it">İtalyanca</option>
+        <option value="pt">Portekizce</option>
+        <option value="ru">Rusça</option>
+        <option value="ar">Arapça</option>
+      </select>
+    </section>
+
+    <section class="kamera-alani">
+      <video id="kameraOnizleme" autoplay playsinline muted></video>
+      <canvas id="fotoCanvas" hidden></canvas>
+      <div class="kamera-kontroller">
+        <button id="kameraAcBtn" class="btn">📸 Kamerayı Aç</button>
+        <button id="fotoCekBtn" class="btn" disabled>📷 Fotoğraf Çek</button>
+        <button id="kameraKapatBtn" class="btn" disabled>❌ Kapat</button>
+      </div>
+    </section>
+
+    <section class="ayar-karti">
+      <label for="galeriInput" class="btn dosya-sec">🖼️ Galeriden Görsel Seç</label>
+      <input type="file" id="galeriInput" accept="image/*" hidden />
+    </section>
+
+    <section class="ayar-karti">
+      <label for="metinGiris">✍️ Metni elle girin</label>
+      <textarea id="metinGiris" rows="3" placeholder="Çevrilecek metni buraya yazın…"></textarea>
+      <button id="metinCevirBtn" class="btn">Çevir</button>
+    </section>
+
+    <section id="sonucAlani" class="sonuc-karti" hidden>
+      <h2>Çeviri Sonucu</h2>
+      <p id="okunanMetin" class="okunan-metin"></p>
+      <hr />
+      <p id="cevrilenMetin" class="cevrilen-metin"></p>
+      <p id="durumMesaji" class="durum"></p>
+    </section>
+  </main>
+
+  <script src="app.js?v=6"></script>
+</body>
+</html>
